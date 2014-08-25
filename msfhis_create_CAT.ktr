@@ -1,0 +1,675 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transformation>
+  <info>
+    <name>msfhis_create_CAT</name>
+    <description/>
+    <extended_description/>
+    <trans_version/>
+    <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
+    <directory>&#x2f;</directory>
+    <parameters>
+    </parameters>
+    <log>
+<trans-log-table><connection/>
+<schema/>
+<table/>
+<size_limit_lines/>
+<interval/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STATUS</id><enabled>Y</enabled><name>STATUS</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name><subject/></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name><subject/></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name><subject/></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name><subject/></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name><subject/></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name><subject/></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>STARTDATE</id><enabled>Y</enabled><name>STARTDATE</name></field><field><id>ENDDATE</id><enabled>Y</enabled><name>ENDDATE</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>DEPDATE</id><enabled>Y</enabled><name>DEPDATE</name></field><field><id>REPLAYDATE</id><enabled>Y</enabled><name>REPLAYDATE</name></field><field><id>LOG_FIELD</id><enabled>Y</enabled><name>LOG_FIELD</name></field><field><id>EXECUTING_SERVER</id><enabled>N</enabled><name>EXECUTING_SERVER</name></field><field><id>EXECUTING_USER</id><enabled>N</enabled><name>EXECUTING_USER</name></field><field><id>CLIENT</id><enabled>N</enabled><name>CLIENT</name></field></trans-log-table>
+<perf-log-table><connection/>
+<schema/>
+<table/>
+<interval/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>SEQ_NR</id><enabled>Y</enabled><name>SEQ_NR</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STEPNAME</id><enabled>Y</enabled><name>STEPNAME</name></field><field><id>STEP_COPY</id><enabled>Y</enabled><name>STEP_COPY</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>INPUT_BUFFER_ROWS</id><enabled>Y</enabled><name>INPUT_BUFFER_ROWS</name></field><field><id>OUTPUT_BUFFER_ROWS</id><enabled>Y</enabled><name>OUTPUT_BUFFER_ROWS</name></field></perf-log-table>
+<channel-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>LOGGING_OBJECT_TYPE</id><enabled>Y</enabled><name>LOGGING_OBJECT_TYPE</name></field><field><id>OBJECT_NAME</id><enabled>Y</enabled><name>OBJECT_NAME</name></field><field><id>OBJECT_COPY</id><enabled>Y</enabled><name>OBJECT_COPY</name></field><field><id>REPOSITORY_DIRECTORY</id><enabled>Y</enabled><name>REPOSITORY_DIRECTORY</name></field><field><id>FILENAME</id><enabled>Y</enabled><name>FILENAME</name></field><field><id>OBJECT_ID</id><enabled>Y</enabled><name>OBJECT_ID</name></field><field><id>OBJECT_REVISION</id><enabled>Y</enabled><name>OBJECT_REVISION</name></field><field><id>PARENT_CHANNEL_ID</id><enabled>Y</enabled><name>PARENT_CHANNEL_ID</name></field><field><id>ROOT_CHANNEL_ID</id><enabled>Y</enabled><name>ROOT_CHANNEL_ID</name></field></channel-log-table>
+<step-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STEPNAME</id><enabled>Y</enabled><name>STEPNAME</name></field><field><id>STEP_COPY</id><enabled>Y</enabled><name>STEP_COPY</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>LOG_FIELD</id><enabled>N</enabled><name>LOG_FIELD</name></field></step-log-table>
+<metrics-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>METRICS_DATE</id><enabled>Y</enabled><name>METRICS_DATE</name></field><field><id>METRICS_CODE</id><enabled>Y</enabled><name>METRICS_CODE</name></field><field><id>METRICS_DESCRIPTION</id><enabled>Y</enabled><name>METRICS_DESCRIPTION</name></field><field><id>METRICS_SUBJECT</id><enabled>Y</enabled><name>METRICS_SUBJECT</name></field><field><id>METRICS_TYPE</id><enabled>Y</enabled><name>METRICS_TYPE</name></field><field><id>METRICS_VALUE</id><enabled>Y</enabled><name>METRICS_VALUE</name></field></metrics-log-table>
+    </log>
+    <maxdate>
+      <connection/>
+      <table/>
+      <field/>
+      <offset>0.0</offset>
+      <maxdiff>0.0</maxdiff>
+    </maxdate>
+    <size_rowset>10000</size_rowset>
+    <sleep_time_empty>50</sleep_time_empty>
+    <sleep_time_full>50</sleep_time_full>
+    <unique_connections>N</unique_connections>
+    <feedback_shown>Y</feedback_shown>
+    <feedback_size>50000</feedback_size>
+    <using_thread_priorities>Y</using_thread_priorities>
+    <shared_objects_file/>
+    <capture_step_performance>N</capture_step_performance>
+    <step_performance_capturing_delay>1000</step_performance_capturing_delay>
+    <step_performance_capturing_size_limit>100</step_performance_capturing_size_limit>
+    <dependencies>
+    </dependencies>
+    <partitionschemas>
+    </partitionschemas>
+    <slaveservers>
+    </slaveservers>
+    <clusterschemas>
+    </clusterschemas>
+  <created_user>-</created_user>
+  <created_date>2014&#x2f;06&#x2f;18 14&#x3a;52&#x3a;05.099</created_date>
+  <modified_user>-</modified_user>
+  <modified_date>2014&#x2f;06&#x2f;18 14&#x3a;52&#x3a;05.099</modified_date>
+  </info>
+  <notepads>
+  </notepads>
+  <order>
+  <hop> <from>Memory Group by</from><to>Modified Java Script Value 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Microsoft Excel Input</from><to>Select values</to><enabled>Y</enabled> </hop>
+  <hop> <from>Modified Java Script Value 2</from><to>REST Client</to><enabled>Y</enabled> </hop>
+  <hop> <from>User Defined Java Expression</from><to>Memory Group by</to><enabled>Y</enabled> </hop>
+  <hop> <from>REST Client</from><to>Write to log</to><enabled>Y</enabled> </hop>
+  <hop> <from>Generate Rows 2</from><to>REST Client 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Json Input</from><to>Select values 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>REST Client 2</from><to>Json Input</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort rows</from><to>Merge Join</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort rows 2</from><to>Merge Join</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values</from><to>Sort rows 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values 2</from><to>Sort rows</to><enabled>Y</enabled> </hop>
+  <hop> <from>Merge Join</from><to>User Defined Java Expression</to><enabled>Y</enabled> </hop>
+  </order>
+  <step>
+    <name>Generate Rows 2</name>
+    <type>RowGenerator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>URL</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>http&#x3a;&#x2f;&#x2f;localhost&#x3a;8080&#x2f;dhis&#x2f;api&#x2f;categoryOptions.json</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <limit>1</limit>
+    <never_ending>N</never_ending>
+    <interval_in_ms>5000</interval_in_ms>
+    <row_time_field>now</row_time_field>
+    <last_time_field>FiveSecondsAgo</last_time_field>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>51</xloc>
+      <yloc>207</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Json Input</name>
+    <type>JsonInput</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <include>N</include>
+    <include_field/>
+    <rownum>N</rownum>
+    <addresultfile>N</addresultfile>
+    <readurl>N</readurl>
+    <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <ignoreMissingPath>N</ignoreMissingPath>
+    <rownum_field/>
+    <file>
+      <name/>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <fields>
+      <field>
+        <name>name</name>
+        <path>&#x24;.categoryOptions&#x5b;&#x2a;&#x5d;.name</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>id</name>
+        <path>&#x24;.categoryOptions&#x5b;&#x2a;&#x5d;.id</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+    </fields>
+    <limit>0</limit>
+    <IsInFields>Y</IsInFields>
+    <IsAFile>N</IsAFile>
+    <valueField>result</valueField>
+    <shortFileFieldName/>
+    <pathFieldName/>
+    <hiddenFieldName/>
+    <lastModificationTimeFieldName/>
+    <uriNameFieldName/>
+    <rootUriNameFieldName/>
+    <extensionFieldName/>
+    <sizeFieldName/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>183</xloc>
+      <yloc>253</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Memory Group by</name>
+    <type>MemoryGroupBy</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <give_back_row>N</give_back_row>
+      <group>
+        <field>
+          <name>cat</name>
+        </field>
+      </group>
+      <fields>
+        <field>
+          <aggregate>opt_concat</aggregate>
+          <subject>opt2</subject>
+          <type>CONCAT_COMMA</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>num</aggregate>
+          <subject>opt2</subject>
+          <type>COUNT_ANY</type>
+          <valuefield/>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>514</xloc>
+      <yloc>136</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Merge Join</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<join_type>INNER</join_type>
+<step1>Sort rows 2</step1>
+<step2>Sort rows</step2>
+    <keys_1>
+      <key>opt</key>
+    </keys_1>
+    <keys_2>
+      <key>opt_name</key>
+    </keys_2>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>486</xloc>
+      <yloc>295</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Microsoft Excel Input</name>
+    <type>ExcelInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <header>Y</header>
+    <noempty>Y</noempty>
+    <stoponempty>N</stoponempty>
+    <filefield/>
+    <sheetfield/>
+    <sheetrownumfield/>
+    <rownumfield/>
+    <sheetfield/>
+    <filefield/>
+    <limit>0</limit>
+    <encoding/>
+    <add_to_result_filenames>Y</add_to_result_filenames>
+    <accept_filenames>N</accept_filenames>
+    <accept_field/>
+    <accept_stepname/>
+    <file>
+      <name>&#x2f;home&#x2f;oglorio&#x2f;Documents&#x2f;MSFHIS_implementer&#x2f;inputs&#x2f;Config Sheet.xls</name>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <fields>
+      <field>
+        <name>Category</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Category option</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+    </fields>
+    <sheets>
+      <sheet>
+        <name>Category</name>
+        <startrow>0</startrow>
+        <startcol>0</startcol>
+        </sheet>
+    </sheets>
+    <strict_types>N</strict_types>
+    <error_ignored>N</error_ignored>
+    <error_line_skipped>N</error_line_skipped>
+    <bad_line_files_destination_directory/>
+    <bad_line_files_extension>warning</bad_line_files_extension>
+    <error_line_files_destination_directory/>
+    <error_line_files_extension>error</error_line_files_extension>
+    <line_number_files_destination_directory/>
+    <line_number_files_extension>line</line_number_files_extension>
+    <shortFileFieldName/>
+    <pathFieldName/>
+    <hiddenFieldName/>
+    <lastModificationTimeFieldName/>
+    <uriNameFieldName/>
+    <rootUriNameFieldName/>
+    <extensionFieldName/>
+    <sizeFieldName/>
+    <spreadsheet_type>JXL</spreadsheet_type>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>78</xloc>
+      <yloc>53</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Modified Java Script Value 2</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#x2f;&#x2f;Script here&#xa;&#xa;var _items &#x3d; &#x5b;&#x5d;&#x3b;&#xa;&#x2f;&#x2f;&#x5b;&#x22;Saab&#x22;, &#x22;Volvo&#x22;, &#x22;BMW&#x22;&#x5d;&#x3b;&#xa;var groupset &#x3d; &#x7b;&#x7d;&#x3b;&#xa;groupset.name &#x3d; cat &#x3b;&#xa;groupset.categoryOptions &#x3d; _items&#x3b;&#xa;var jsonString &#x3d; JSON.stringify&#x28;groupset&#x29;&#x3b;&#xa;jsonString &#x3d; jsonString.replace&#x28;&#x22;&#x5b;&#x5d;&#x22;, &#x22;&#x5b;&#x22; &#x2b; opt_concat &#x2b; &#x22;&#x5d;&#x22;  &#x29;&#x3b;&#xa;&#x2f;&#x2f; &#x2f;&#x5b;&#x5c;&#x5b;&#x5d;&#x2f;g&#xa;&#x2f;&#x2f; &#x22;&#x5b;&#x22; &#x2b; de_g_concat &#x2b; &#x22;&#x5d;&#x22;&#xa;&#xa;&#xa;&#x2f;&#x2f;var jsonText &#x3d; &#x27;&#x22;items&#x22;&#x3a;&#x5b;&#x7b;&#x22;name&#x22;&#x3a;&#x22;&#x27; &#x3b;&#xa;&#x2f;&#x2f;var de_concat2 &#x3d; replace&#x28;de_concat,&#x27;,&#x27;,&#x27;&#x22;&#x7d;,&#x7b;&#x22;name&#x22;&#x3a;&#x22;&#x27;&#x29;&#x3b;&#xa;&#x2f;&#x2f;jsonText &#x2b;&#x3d; de_concat2 &#x2b; &#x27;&#x22;&#x7d;&#x5d;&#x27; &#x3b;&#xa;&#xa;var URL &#x3d; &#x22;http&#x3a;&#x2f;&#x2f;localhost&#x3a;8080&#x2f;dhis&#x2f;api&#x2f;metaData&#x22;&#x3b;&#xa;&#xa;jsonString &#x3d; &#x27;&#x7b;&#x22;categories&#x22;&#x3a;&#x5b;&#x27; &#x2b;  jsonString &#x2b; &#x27;&#x5d;&#x7d;&#x27;&#x3b;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>jsonString</name>
+        <rename>jsonString</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>URL</name>
+        <rename>URL</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>517</xloc>
+      <yloc>53</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>REST Client</name>
+    <type>Rest</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <applicationType>JSON</applicationType>
+    <method>POST</method>
+    <url/>
+    <urlInField>Y</urlInField>
+    <dynamicMethod>N</dynamicMethod>
+    <methodFieldName/>
+    <urlField>URL</urlField>
+    <bodyField>jsonString</bodyField>
+    <httpLogin>admin</httpLogin>
+    <httpPassword>district</httpPassword>
+    <httpPassword>Encrypted 2be98afc86aa7f2e4af10bd64cc9bacce</httpPassword>
+    <proxyHost/>
+    <proxyPort/>
+    <preemptive>N</preemptive>
+    <trustStoreFile/>
+    <trustStorePassword/>
+    <headers>
+      </headers>
+    <parameters>
+      </parameters>
+    <result>
+      <name>result</name>
+      <code>http_resilt</code>
+      <response_time/>
+      </result>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>673</xloc>
+      <yloc>53</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>REST Client 2</name>
+    <type>Rest</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <applicationType>JSON</applicationType>
+    <method>GET</method>
+    <url/>
+    <urlInField>Y</urlInField>
+    <dynamicMethod>N</dynamicMethod>
+    <methodFieldName/>
+    <urlField>URL</urlField>
+    <bodyField>outputValue</bodyField>
+    <httpLogin>admin</httpLogin>
+    <httpPassword>district</httpPassword>
+    <httpPassword>Encrypted 2be98afc86aa7f2e4af10bd64cc9bacce</httpPassword>
+    <proxyHost/>
+    <proxyPort/>
+    <preemptive>Y</preemptive>
+    <trustStoreFile/>
+    <trustStorePassword/>
+    <headers>
+      </headers>
+    <parameters>
+      </parameters>
+    <result>
+      <name>result</name>
+      <code>http_resilt</code>
+      <response_time/>
+      </result>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>114</xloc>
+      <yloc>311</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>Category</name>
+        <rename>cat</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>Category option</name>
+        <rename>opt</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>194</xloc>
+      <yloc>178</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Select values 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>name</name>
+        <rename>opt_name</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>id</name>
+        <rename>opt_id</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>291</xloc>
+      <yloc>321</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sort rows</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>opt_name</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>362</xloc>
+      <yloc>323</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sort rows 2</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>opt</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>338</xloc>
+      <yloc>181</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>User Defined Java Expression</name>
+    <type>Janino</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <formula><field_name>opt2</field_name>
+<formula_string>&#x22;&#x7b;&#x5c;&#x22;id&#x5c;&#x22;&#x3a;&#x5c;&#x22;&#x22;  &#x2b; opt_id&#x2b; &#x22;&#x5c;&#x22;&#x7d;&#x22;</formula_string>
+<value_type>String</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<replace_field/>
+</formula>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>522</xloc>
+      <yloc>222</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Write to log</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+      <limitRows>N</limitRows>
+      <limitRowsNumber>0</limitRowsNumber>
+      <logmessage/>
+    <fields>
+      <field>
+        <name>result</name>
+        </field>
+      <field>
+        <name>http_resilt</name>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>852</xloc>
+      <yloc>53</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step_error_handling>
+  </step_error_handling>
+   <slave-step-copy-partition-distribution>
+</slave-step-copy-partition-distribution>
+   <slave_transformation>N</slave_transformation>
+
+</transformation>
