@@ -9,6 +9,31 @@
     <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
+        <parameter>
+            <name>conf_file_url</name>
+            <default_value>&#x2f;home&#x2f;oglorio&#x2f;Documents&#x2f;MSFHIS_implementer&#x2f;inputs&#x2f;Config_Sheet_v2.xls</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>dhis_api_meta_url</name>
+            <default_value>http&#x3a;&#x2f;&#x2f;localhost&#x3a;8080&#x2f;dhis&#x2f;api&#x2f;metaData</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>dhis_api_url</name>
+            <default_value>http&#x3a;&#x2f;&#x2f;localhost&#x3a;8080&#x2f;dhis&#x2f;api&#x2f;</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>dhis_passwd</name>
+            <default_value>district</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>dhis_user</name>
+            <default_value>admin</default_value>
+            <description/>
+        </parameter>
     </parameters>
     <log>
 <trans-log-table><connection/>
@@ -75,12 +100,11 @@
   </notepads>
   <order>
   <hop> <from>Microsoft Excel Input</from><to>Select values</to><enabled>Y</enabled> </hop>
-  <hop> <from>Json output</from><to>Modified Java Script Value</to><enabled>Y</enabled> </hop>
-  <hop> <from>Modified Java Script Value</from><to>REST Client</to><enabled>Y</enabled> </hop>
   <hop> <from>REST Client</from><to>Write to log</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values</from><to>Add sequence</to><enabled>Y</enabled> </hop>
   <hop> <from>Add sequence</from><to>Select values 2 </to><enabled>Y</enabled> </hop>
-  <hop> <from>Select values 2 </from><to>Json output</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values 2 </from><to>Modified Java Script Value 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Modified Java Script Value 2</from><to>REST Client</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add sequence</name>
@@ -105,56 +129,8 @@
       <max_value>999999999</max_value>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>394</xloc>
-      <yloc>59</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Json output</name>
-    <type>JsonOutput</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <outputValue>outputValue</outputValue>
-    <jsonBloc>organisationUnitLevels</jsonBloc>
-    <nrRowsInBloc>1</nrRowsInBloc>
-    <operation_type>outputvalue</operation_type>
-    <compatibility_mode>N</compatibility_mode>
-    <encoding>UTF-8</encoding>
-    <addtoresult>N</addtoresult>
-    <file>
-      <name>&#x2f;home&#x2f;oglorio&#x2f;Documents&#x2f;MSFHIS_implementer&#x2f;outputs&#x2f;out</name>
-      <extention>json</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <create_parent_folder>N</create_parent_folder>
-      <DoNotOpenNewFileInit>N</DoNotOpenNewFileInit>
-      <servlet_output>N</servlet_output>
-      </file>
-    <fields>
-      <field>
-        <name>name</name>
-        <element>name</element>
-    </field>
-      <field>
-        <name>level</name>
-        <element>level</element>
-    </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>544</xloc>
-      <yloc>47</yloc>
+      <xloc>268</xloc>
+      <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -186,7 +162,7 @@
     <accept_field/>
     <accept_stepname/>
     <file>
-      <name>&#x2f;home&#x2f;oglorio&#x2f;Documents&#x2f;MSFHIS_implementer&#x2f;inputs&#x2f;Config Sheet.xls</name>
+      <name>&#x24;&#x7b;conf_file_url&#x7d;</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
@@ -233,14 +209,14 @@
     <spreadsheet_type>JXL</spreadsheet_type>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>201</xloc>
-      <yloc>196</yloc>
+      <xloc>78</xloc>
+      <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Modified Java Script Value</name>
+    <name>Modified Java Script Value 2</name>
     <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
@@ -254,17 +230,17 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#xa;&#xa;var URL &#x3d; &#x22;http&#x3a;&#x2f;&#x2f;localhost&#x3a;8080&#x2f;dhis&#x2f;api&#x2f;metaData&#x22;&#x3b;&#xa;&#xa;&#xa;&#xa;&#xa;&#x2f;&#x2f;var body &#x3d; outputValue&#x3b; &#xa;&#x2f;&#x2f;var body2 &#x3d; &#x27;&#x7b;&#x22;organisationUnitGroupSets&#x22;&#x3a;&#x5b;&#x7b;&#x22;name&#x22;&#x3a;&#x22;Emergency Room 29&#x22;,&#x22;shortName&#x22;&#x3a;&#x22;ER29&#x22;&#x7d;&#x5d;&#x7d;&#x27;&#x3b;&#xa;&#x2f;&#x2f;var u&#x3d; &#x22;admin&#x3a;district&#x22; &#x3b;&#xa;&#x2f;&#x2f;var d&#x3d; &#x22;&#x40;&#x2f;home&#x2f;oglorio&#x2f;Documents&#x2f;MSFHIS_implementer&#x2f;outputs&#x2f;metaData_oug2.json&#x22;&#xa;&#x2f;&#x2f;var header &#x3d; &#x22;Content-Type&#x3a; application&#x2f;json&#x22; &#x3b;&#xa;&#x2f;&#x2f;var header_p1 &#x3d; &#x22;Content-Type&#x22; &#x3b;&#xa;&#x2f;&#x2f;var header_v1 &#x3d; &#x22;application&#x2f;json&#x22; &#x3b;&#xa;&#xa;&#x2f;&#x2f;curl -H &#x22;Content-Type&#x3a; application&#x2f;xml&#x22; -u admin&#x3a;district -d &#x40;metaData.xml &#x22;http&#x3a;&#x2f;&#x2f;apps.dhis2.org&#x2f;demo&#x2f;api&#x2f;metaData&#x22; -X POST -v</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>URL</name>
-        <rename>URL</rename>
+        <jsScript_script>var _level &#x3d; &#x7b;&#x7d;&#x3b;&#xa;_level.name &#x3d; name &#x3b;&#xa;_level.level &#x3d; level &#x3b;&#xa;var jsonString &#x3d; JSON.stringify&#x28;&#x7b;&#x27;organisationUnitLevels&#x27;&#x3a; &#x5b;_level&#x5d;&#x7d;&#x29;&#xa;&#xa;&#x2f;&#x2f;jsonString &#x3d; jsonString.replace&#x28;&#x22;&#x5b;&#x5d;&#x22;, &#x22;&#x5b;&#x22; &#x2b; opt_concat &#x2b; &#x22;&#x5d;&#x22;  &#x29;&#x3b;&#xa;&#x2f;&#x2f; &#x2f;&#x5b;&#x5c;&#x5b;&#x5d;&#x2f;g&#xa;&#x2f;&#x2f; &#x22;&#x5b;&#x22; &#x2b; de_g_concat &#x2b; &#x22;&#x5d;&#x22;&#xa;&#xa;&#x2f;&#x2f;jsonString &#x3d; &#x27;&#x7b;&#x22;dataElementGroups&#x22;&#x3a;&#x5b;&#x27; &#x2b;  jsonString &#x2b; &#x27;&#x5d;&#x7d;&#x27;&#x3b;&#xa;&#xa;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>jsonString</name>
+        <rename>jsonString</rename>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>687</xloc>
-      <yloc>35</yloc>
+      <xloc>535</xloc>
+      <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -282,15 +258,15 @@
            </partitioning>
     <applicationType>JSON</applicationType>
     <method>POST</method>
-    <url/>
-    <urlInField>Y</urlInField>
+    <url>&#x24;&#x7b;dhis_api_meta_url&#x7d;</url>
+    <urlInField>N</urlInField>
     <dynamicMethod>N</dynamicMethod>
     <methodFieldName/>
     <urlField>URL</urlField>
-    <bodyField>outputValue</bodyField>
-    <httpLogin>admin</httpLogin>
-    <httpPassword>district</httpPassword>
-    <httpPassword>Encrypted 2be98afc86aa7f2e4af10bd64cc9bacce</httpPassword>
+    <bodyField>jsonString</bodyField>
+    <httpLogin>&#x24;&#x7b;dhis_user&#x7d;</httpLogin>
+    <httpPassword>&#x24;&#x7b;dhis_passwd&#x7d;</httpPassword>
+    <httpPassword>&#x24;&#x7b;dhis_passwd&#x7d;</httpPassword>
     <proxyHost/>
     <proxyPort/>
     <preemptive>N</preemptive>
@@ -307,8 +283,8 @@
       </result>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>819</xloc>
-      <yloc>72</yloc>
+      <xloc>693</xloc>
+      <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -331,8 +307,8 @@
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>290</xloc>
-      <yloc>90</yloc>
+      <xloc>164</xloc>
+      <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -341,7 +317,7 @@
     <name>Select values 2 </name>
     <type>SelectValues</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
@@ -359,8 +335,8 @@
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>501</xloc>
-      <yloc>156</yloc>
+      <xloc>412</xloc>
+      <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -380,7 +356,7 @@
       <displayHeader>Y</displayHeader>
       <limitRows>N</limitRows>
       <limitRowsNumber>0</limitRowsNumber>
-      <logmessage>&#x24;&#x7b;result&#x7d;</logmessage>
+      <logmessage>Create Levels log</logmessage>
     <fields>
       <field>
         <name>result</name>
@@ -391,8 +367,8 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>936</xloc>
-      <yloc>161</yloc>
+      <xloc>810</xloc>
+      <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

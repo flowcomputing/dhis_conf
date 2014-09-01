@@ -9,6 +9,31 @@
     <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
+        <parameter>
+            <name>conf_file_url</name>
+            <default_value>&#x2f;home&#x2f;oglorio&#x2f;Documents&#x2f;MSFHIS_implementer&#x2f;inputs&#x2f;Config_Sheet_v2.xls</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>dhis_api_meta_url</name>
+            <default_value>http&#x3a;&#x2f;&#x2f;localhost&#x3a;8080&#x2f;dhis&#x2f;api&#x2f;metaData</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>dhis_api_url</name>
+            <default_value>http&#x3a;&#x2f;&#x2f;localhost&#x3a;8080&#x2f;dhis&#x2f;api&#x2f;</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>dhis_passwd</name>
+            <default_value>district</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>dhis_user</name>
+            <default_value>admin</default_value>
+            <description/>
+        </parameter>
     </parameters>
     <log>
 <trans-log-table><connection/>
@@ -75,7 +100,6 @@
   </notepads>
   <order>
   <hop> <from>Microsoft Excel Input</from><to>Select values</to><enabled>Y</enabled> </hop>
-  <hop> <from>Generate Rows 2 2</from><to>REST Client 2 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Json Input 2</from><to>Select values 2 2</to><enabled>Y</enabled> </hop>
   <hop> <from>REST Client 2 2</from><to>Json Input 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values 2 2</from><to>Sort rows 3</to><enabled>Y</enabled> </hop>
@@ -84,12 +108,15 @@
   <hop> <from>Merge Join 2</from><to>Select values 3</to><enabled>Y</enabled> </hop>
   <hop> <from>REST Client</from><to>Write to log</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values</from><to>Sort rows 2 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Select values 3</from><to>Modified Java Script Value 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Modified Java Script Value 2</from><to>REST Client</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Variables</from><to>Modified Java Script Value</to><enabled>Y</enabled> </hop>
+  <hop> <from>Modified Java Script Value</from><to>REST Client 2 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values 3</from><to>Limit to 50 character</to><enabled>Y</enabled> </hop>
+  <hop> <from>Limit to 50 character</from><to>Modified Java Script Value 2</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Generate Rows 2 2</name>
-    <type>RowGenerator</type>
+    <name>Get Variables</name>
+    <type>GetVariable</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -100,27 +127,22 @@
            </partitioning>
     <fields>
       <field>
-        <name>URL</name>
+        <name>dhis_api_url</name>
+        <variable>&#x24;&#x7b;dhis_api_url&#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
-        <nullif>http&#x3a;&#x2f;&#x2f;localhost&#x3a;8080&#x2f;dhis&#x2f;api&#x2f;categoryCombos.json</nullif>
         <length>-1</length>
         <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
+        <trim_type>none</trim_type>
       </field>
     </fields>
-    <limit>1</limit>
-    <never_ending>N</never_ending>
-    <interval_in_ms>5000</interval_in_ms>
-    <row_time_field>now</row_time_field>
-    <last_time_field>FiveSecondsAgo</last_time_field>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>75</xloc>
-      <yloc>259</yloc>
+      <xloc>57</xloc>
+      <yloc>180</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -194,8 +216,35 @@
     <sizeFieldName/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>195</xloc>
-      <yloc>252</yloc>
+      <xloc>196</xloc>
+      <yloc>114</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Limit to 50 character</name>
+    <type>StringCut</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>de</in_stream_name>
+        <out_stream_name/>
+        <cut_from>0</cut_from>
+        <cut_to>50</cut_to>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>637</xloc>
+      <yloc>151</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -222,8 +271,8 @@
     </keys_2>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>477</xloc>
-      <yloc>239</yloc>
+      <xloc>444</xloc>
+      <yloc>29</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -255,7 +304,7 @@
     <accept_field/>
     <accept_stepname/>
     <file>
-      <name>&#x2f;home&#x2f;oglorio&#x2f;Documents&#x2f;MSFHIS_implementer&#x2f;inputs&#x2f;Config Sheet.xls</name>
+      <name>&#x24;&#x7b;conf_file_url&#x7d;</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
@@ -263,7 +312,7 @@
     </file>
     <fields>
       <field>
-        <name>Data Element</name>
+        <name>DE Code</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -275,7 +324,7 @@
         <group/>
       </field>
       <field>
-        <name>Data Element Group</name>
+        <name>DataElement</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -287,7 +336,7 @@
         <group/>
       </field>
       <field>
-        <name>Category Combination</name>
+        <name>DE Group</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -299,7 +348,7 @@
         <group/>
       </field>
       <field>
-        <name>Type</name>
+        <name>Combo</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -311,7 +360,31 @@
         <group/>
       </field>
       <field>
-        <name>aggregationOperator</name>
+        <name>formName</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>type</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>aggOperator</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -350,8 +423,38 @@
     <spreadsheet_type>JXL</spreadsheet_type>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>69</xloc>
-      <yloc>79</yloc>
+      <xloc>75</xloc>
+      <yloc>28</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Modified Java Script Value</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var URL &#x3d; dhis_api_url &#x2b; &#x22;categoryCombos.json&#x3f;paging&#x3d;false&#x22;&#x3b;&#xa;&#x2f;&#x2f;getVariable&#x28;&#x22;dhis_api_url&#x22;,&#x22;&#x22;&#x29; </jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>URL</name>
+        <rename>URL</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>127</xloc>
+      <yloc>126</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -371,23 +474,17 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var URL &#x3d; &#x22;http&#x3a;&#x2f;&#x2f;localhost&#x3a;8080&#x2f;dhis&#x2f;api&#x2f;metaData&#x22;&#x3b;&#xa;var jsonString &#x3d; &#x27;&#x7b;&#x22;dataElements&#x22;&#x3a;&#x5b;&#x7b;&#x22;name&#x22;&#x3a;&#x22;&#x27;&#x2b; de &#x2b; &#x27;&#x22;,&#x22;shortName&#x22;&#x3a;&#x22;&#x27;&#x2b; de &#x2b; &#x27;&#x22;, &#x22;type&#x22;&#x3a;&#x22;&#x27; &#x2b; type &#x2b; &#x27;&#x22;,&#x22;domainType&#x22;&#x3a;&#x22;aggregate&#x22;,&#x22;aggregationOperator&#x22;&#x3a;&#x22;&#x27; &#x2b; operator &#x2b; &#x27;&#x22;,&#x22;categoryCombo&#x22;&#x3a;&#x7b;&#x22;id&#x22;&#x3a;&#x22;&#x27; &#x2b; cat_combo_id &#x2b; &#x27;&#x22;&#x7d;&#x7d;&#x5d;&#x7d;&#x27;&#x3b;&#xa;&#xa;</jsScript_script>
+        <jsScript_script>&#x2f;&#x2f;var jsonString &#x3d; &#x27;&#x7b;&#x22;dataElements&#x22;&#x3a;&#x5b;&#x7b;&#x22;name&#x22;&#x3a;&#x22;&#x27;&#x2b; de &#x2b; &#x27;&#x22;,&#x22;shortName&#x22;&#x3a;&#x22;&#x27;&#x2b; de &#x2b; &#x27;&#x22;, &#x22;type&#x22;&#x3a;&#x22;&#x27; &#x2b; type &#x2b; &#x27;&#x22;,&#x22;domainType&#x22;&#x3a;&#x22;aggregate&#x22;,&#x22;aggregationOperator&#x22;&#x3a;&#x22;&#x27; &#x2b; operator &#x2b; &#x27;&#x22;,&#x22;categoryCombo&#x22;&#x3a;&#x7b;&#x22;id&#x22;&#x3a;&#x22;&#x27; &#x2b; cat_combo_id &#x2b; &#x27;&#x22;&#x7d;&#x7d;&#x5d;&#x7d;&#x27;&#x3b;&#xa;&#xa;var catcmb &#x3d; &#x7b;&#x7d;&#x3b;&#xa;	catcmb.id &#x3d; cat_combo_id &#x3b;&#xa;&#xa;var _de &#x3d; &#x7b;&#x7d;&#x3b;&#xa;_de.code&#x3d; de_code&#x3b; &#xa;_de.name &#x3d; de &#x3b;&#xa;_de.shortName &#x3d; de &#x3b;&#xa;_de.type &#x3d; type &#x3b;&#xa;_de.domainType &#x3d; &#x22;aggregate&#x22; &#x3b;&#xa;_de.aggregationOperator &#x3d; operator&#x3b;&#xa;_de.categoryCombo &#x3d; catcmb &#x3b; &#xa;_de.formName &#x3d; formName &#x3b; &#xa;var jsonString &#x3d; JSON.stringify&#x28;&#x7b;&#x27;dataElements&#x27;&#x3a; &#x5b;_de&#x5d;&#x7d;&#x29;&#xa;&#x2f;&#x2f;var URL &#x3d; getVariable&#x28;&#x22;dhis_api_meta_url&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xa;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>jsonString</name>
         <rename>jsonString</rename>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
         <replace>N</replace>
-      </field>      <field>        <name>URL</name>
-        <rename>URL</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>657</xloc>
-      <yloc>129</yloc>
+      <xloc>690</xloc>
+      <yloc>31</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -405,15 +502,15 @@
            </partitioning>
     <applicationType>JSON</applicationType>
     <method>POST</method>
-    <url/>
-    <urlInField>Y</urlInField>
+    <url>&#x24;&#x7b;dhis_api_meta_url&#x7d;</url>
+    <urlInField>N</urlInField>
     <dynamicMethod>N</dynamicMethod>
     <methodFieldName/>
     <urlField>URL</urlField>
     <bodyField>jsonString</bodyField>
-    <httpLogin>admin</httpLogin>
-    <httpPassword>district</httpPassword>
-    <httpPassword>Encrypted 2be98afc86aa7f2e4af10bd64cc9bacce</httpPassword>
+    <httpLogin>&#x24;&#x7b;dhis_user&#x7d;</httpLogin>
+    <httpPassword>&#x24;&#x7b;dhis_passwd&#x7d;</httpPassword>
+    <httpPassword>&#x24;&#x7b;dhis_passwd&#x7d;</httpPassword>
     <proxyHost/>
     <proxyPort/>
     <preemptive>N</preemptive>
@@ -430,8 +527,8 @@
       </result>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>842</xloc>
-      <yloc>137</yloc>
+      <xloc>807</xloc>
+      <yloc>34</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -474,8 +571,8 @@
       </result>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>147</xloc>
-      <yloc>323</yloc>
+      <xloc>156</xloc>
+      <yloc>184</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -491,27 +588,35 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <fields>      <field>        <name>Data Element</name>
+    <fields>      <field>        <name>DE Code</name>
+        <rename>de_code</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>DataElement</name>
         <rename>de</rename>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>Category Combination</name>
+      </field>      <field>        <name>Combo</name>
         <rename>cat_combo</rename>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>Type</name>
+      </field>      <field>        <name>formName</name>
+        <rename>formName</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>type</name>
         <rename>type</rename>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>aggregationOperator</name>
+      </field>      <field>        <name>aggOperator</name>
         <rename>operator</rename>
         <length>-2</length>
         <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>191</xloc>
-      <yloc>130</yloc>
+      <xloc>197</xloc>
+      <yloc>28</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -538,8 +643,8 @@
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>295</xloc>
-      <yloc>319</yloc>
+      <xloc>296</xloc>
+      <yloc>181</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -571,11 +676,19 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>de_code</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>formName</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>611</xloc>
-      <yloc>261</yloc>
+      <xloc>557</xloc>
+      <yloc>28</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -608,8 +721,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>327</xloc>
-      <yloc>197</yloc>
+      <xloc>333</xloc>
+      <yloc>28</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -642,8 +755,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>381</xloc>
-      <yloc>319</yloc>
+      <xloc>355</xloc>
+      <yloc>118</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -663,7 +776,7 @@
       <displayHeader>Y</displayHeader>
       <limitRows>N</limitRows>
       <limitRowsNumber>0</limitRowsNumber>
-      <logmessage>&#x24;&#x7b;result&#x7d;</logmessage>
+      <logmessage>Create DEs log</logmessage>
     <fields>
       <field>
         <name>result</name>
@@ -674,8 +787,8 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1105</xloc>
-      <yloc>249</yloc>
+      <xloc>908</xloc>
+      <yloc>33</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

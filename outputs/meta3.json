@@ -1,0 +1,1 @@
+{"organisationUnitGroups":[{"name":"Out-Patient Care 28","organisationUnitGroupSet":{ "name ": "Service  / Activity "},"access":{ "manage ":true, "externalize ":true, "write ":true, "read ":true, "update ":true, "delete ":true},"shortName":"Out-Patient Care (Without Hopitalization)"}]}

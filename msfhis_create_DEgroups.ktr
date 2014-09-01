@@ -9,6 +9,31 @@
     <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
+        <parameter>
+            <name>conf_file_url</name>
+            <default_value>&#x2f;home&#x2f;oglorio&#x2f;Documents&#x2f;MSFHIS_implementer&#x2f;inputs&#x2f;Config_Sheet_v2.xls</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>dhis_api_meta_url</name>
+            <default_value>http&#x3a;&#x2f;&#x2f;localhost&#x3a;8080&#x2f;dhis&#x2f;api&#x2f;metaData</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>dhis_api_url</name>
+            <default_value>http&#x3a;&#x2f;&#x2f;localhost&#x3a;8080&#x2f;dhis&#x2f;api&#x2f;</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>dhis_passwd</name>
+            <default_value>district</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>dhis_user</name>
+            <default_value>admin</default_value>
+            <description/>
+        </parameter>
     </parameters>
     <log>
 <trans-log-table><connection/>
@@ -75,22 +100,54 @@
   </notepads>
   <order>
   <hop> <from>Microsoft Excel Input</from><to>Select values</to><enabled>Y</enabled> </hop>
-  <hop> <from>Generate Rows 2</from><to>REST Client 2 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Json Input</from><to>Select values 2 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Memory Group by</from><to>Modified Java Script Value 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Merge Join</from><to>User Defined Java Expression</to><enabled>Y</enabled> </hop>
-  <hop> <from>Modified Java Script Value 2</from><to>REST Client 2</to><enabled>Y</enabled> </hop>
   <hop> <from>REST Client 2</from><to>Write to log 2</to><enabled>Y</enabled> </hop>
   <hop> <from>REST Client 2 2</from><to>Json Input</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values 2 2</from><to>Sort rows</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows</from><to>Merge Join</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 2</from><to>Merge Join</to><enabled>Y</enabled> </hop>
-  <hop> <from>User Defined Java Expression</from><to>Memory Group by</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values</from><to>Sort rows 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Variables</from><to>Modified Java Script Value</to><enabled>Y</enabled> </hop>
+  <hop> <from>Modified Java Script Value</from><to>REST Client 2 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values 3</from><to>Memory Group by 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Merge Join</from><to>Select values 3</to><enabled>Y</enabled> </hop>
+  <hop> <from>Build JSON string 2</from><to>REST Client 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Memory Group by 2</from><to>String operations</to><enabled>Y</enabled> </hop>
+  <hop> <from>String operations</from><to>Build JSON string 2</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Generate Rows 2</name>
-    <type>RowGenerator</type>
+    <name>Build JSON string 2</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var _deg &#x3d; &#x7b;&#x7d;&#x3b;&#xa;_deg.name &#x3d; de_group &#x3b;&#xa;_deg.shortName &#x3d;  de_group &#x3b;&#xa;_deg.dataElements &#x3d; &#x5b;&#x5d;&#x3b;&#xa;&#xa;var deids &#x3d; deids_concat.split&#x28;&#x27;,&#x27;&#x29;&#x3b;&#xa;for&#x28;i&#x3d;0&#x3b; i&#x3c;deids.length&#x3b; i&#x2b;&#x2b;&#x29;&#x7b;&#xa;	var de &#x3d; &#x7b;&#x7d;&#x3b;&#xa;	de.id &#x3d; deids&#x5b;i&#x5d;&#x3b;&#xa;	_deg.dataElements.push&#x28;de&#x29;&#x3b;&#xa;&#x7d;&#xa;&#xa;var jsonString &#x3d; JSON.stringify&#x28;&#x7b;&#x27;dataElementGroups&#x27;&#x3a; &#x5b;_deg&#x5d;&#x7d;&#x29;&#xa;&#x2f;&#x2f;var URL &#x3d; getVariable&#x28;&#x22;dhis_api_meta_url&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xa;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>jsonString</name>
+        <rename>jsonString</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>758</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Variables</name>
+    <type>GetVariable</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -101,27 +158,22 @@
            </partitioning>
     <fields>
       <field>
-        <name>URL</name>
+        <name>dhis_api_url</name>
+        <variable>&#x24;&#x7b;dhis_api_url&#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
-        <nullif>http&#x3a;&#x2f;&#x2f;localhost&#x3a;8080&#x2f;dhis&#x2f;api&#x2f;dataElements.json&#x3f;paging&#x3d;false</nullif>
         <length>-1</length>
         <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
+        <trim_type>none</trim_type>
       </field>
     </fields>
-    <limit>1</limit>
-    <never_ending>N</never_ending>
-    <interval_in_ms>5000</interval_in_ms>
-    <row_time_field>now</row_time_field>
-    <last_time_field>FiveSecondsAgo</last_time_field>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>70</xloc>
-      <yloc>219</yloc>
+      <xloc>49</xloc>
+      <yloc>143</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -195,14 +247,14 @@
     <sizeFieldName/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>180</xloc>
-      <yloc>220</yloc>
+      <xloc>252</xloc>
+      <yloc>129</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Memory Group by</name>
+    <name>Memory Group by 2</name>
     <type>MemoryGroupBy</type>
     <description/>
     <distribute>N</distribute>
@@ -220,22 +272,16 @@
       </group>
       <fields>
         <field>
-          <aggregate>opt_concat</aggregate>
-          <subject>opt2</subject>
+          <aggregate>deids_concat</aggregate>
+          <subject>de_id</subject>
           <type>CONCAT_COMMA</type>
-          <valuefield/>
-        </field>
-        <field>
-          <aggregate>num</aggregate>
-          <subject>opt2</subject>
-          <type>COUNT_ANY</type>
           <valuefield/>
         </field>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>513</xloc>
-      <yloc>196</yloc>
+      <xloc>660</xloc>
+      <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -244,7 +290,7 @@
     <name>Merge Join</name>
     <type>MergeJoin</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
@@ -262,8 +308,8 @@
     </keys_2>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>392</xloc>
-      <yloc>211</yloc>
+      <xloc>439</xloc>
+      <yloc>35</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -295,7 +341,7 @@
     <accept_field/>
     <accept_stepname/>
     <file>
-      <name>&#x2f;home&#x2f;oglorio&#x2f;Documents&#x2f;MSFHIS_implementer&#x2f;inputs&#x2f;Config Sheet.xls</name>
+      <name>&#x24;&#x7b;conf_file_url&#x7d;</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
@@ -303,7 +349,7 @@
     </file>
     <fields>
       <field>
-        <name>Data Element</name>
+        <name>DE Code</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -315,7 +361,67 @@
         <group/>
       </field>
       <field>
-        <name>Data Element Group</name>
+        <name>DataElement</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>DE Group</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Combo</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>formName</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>type</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>aggOperator</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -354,14 +460,14 @@
     <spreadsheet_type>JXL</spreadsheet_type>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>85</xloc>
-      <yloc>93</yloc>
+      <xloc>73</xloc>
+      <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Modified Java Script Value 2</name>
+    <name>Modified Java Script Value</name>
     <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
@@ -375,14 +481,8 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#x2f;&#x2f;Script here&#xa;&#xa;var _items &#x3d; &#x5b;&#x5d;&#x3b;&#xa;&#x2f;&#x2f;&#x5b;&#x22;Saab&#x22;, &#x22;Volvo&#x22;, &#x22;BMW&#x22;&#x5d;&#x3b;&#xa;var groupset &#x3d; &#x7b;&#x7d;&#x3b;&#xa;groupset.name &#x3d; de_group &#x3b;&#xa;groupset.shortName &#x3d; de_group &#x3b;&#xa;groupset.dataElements &#x3d; _items&#x3b;&#xa;var jsonString &#x3d; JSON.stringify&#x28;groupset&#x29;&#x3b;&#xa;jsonString &#x3d; jsonString.replace&#x28;&#x22;&#x5b;&#x5d;&#x22;, &#x22;&#x5b;&#x22; &#x2b; opt_concat &#x2b; &#x22;&#x5d;&#x22;  &#x29;&#x3b;&#xa;&#x2f;&#x2f; &#x2f;&#x5b;&#x5c;&#x5b;&#x5d;&#x2f;g&#xa;&#x2f;&#x2f; &#x22;&#x5b;&#x22; &#x2b; de_g_concat &#x2b; &#x22;&#x5d;&#x22;&#xa;&#xa;&#xa;&#x2f;&#x2f;var jsonText &#x3d; &#x27;&#x22;items&#x22;&#x3a;&#x5b;&#x7b;&#x22;name&#x22;&#x3a;&#x22;&#x27; &#x3b;&#xa;&#x2f;&#x2f;var de_concat2 &#x3d; replace&#x28;de_concat,&#x27;,&#x27;,&#x27;&#x22;&#x7d;,&#x7b;&#x22;name&#x22;&#x3a;&#x22;&#x27;&#x29;&#x3b;&#xa;&#x2f;&#x2f;jsonText &#x2b;&#x3d; de_concat2 &#x2b; &#x27;&#x22;&#x7d;&#x5d;&#x27; &#x3b;&#xa;&#xa;var URL &#x3d; &#x22;http&#x3a;&#x2f;&#x2f;localhost&#x3a;8080&#x2f;dhis&#x2f;api&#x2f;metaData&#x22;&#x3b;&#xa;&#xa;jsonString &#x3d; &#x27;&#x7b;&#x22;dataElementGroups&#x22;&#x3a;&#x5b;&#x27; &#x2b;  jsonString &#x2b; &#x27;&#x5d;&#x7d;&#x27;&#x3b;&#xa;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>jsonString</name>
-        <rename>jsonString</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>URL</name>
+        <jsScript_script>var URL &#x3d; dhis_api_url &#x2b; &#x22;dataElements.json&#x3f;paging&#x3d;false&#x22;&#x3b;&#xa;&#x2f;&#x2f;getVariable&#x28;&#x22;dhis_api_url&#x22;,&#x22;&#x22;&#x29; </jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>URL</name>
         <rename>URL</rename>
         <type>String</type>
         <length>-1</length>
@@ -390,8 +490,8 @@
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>634</xloc>
-      <yloc>319</yloc>
+      <xloc>125</xloc>
+      <yloc>130</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -409,15 +509,15 @@
            </partitioning>
     <applicationType>JSON</applicationType>
     <method>POST</method>
-    <url/>
-    <urlInField>Y</urlInField>
+    <url>&#x24;&#x7b;dhis_api_meta_url&#x7d;</url>
+    <urlInField>N</urlInField>
     <dynamicMethod>N</dynamicMethod>
     <methodFieldName/>
     <urlField>URL</urlField>
     <bodyField>jsonString</bodyField>
-    <httpLogin>admin</httpLogin>
-    <httpPassword>district</httpPassword>
-    <httpPassword>Encrypted 2be98afc86aa7f2e4af10bd64cc9bacce</httpPassword>
+    <httpLogin>&#x24;&#x7b;dhis_user&#x7d;</httpLogin>
+    <httpPassword>&#x24;&#x7b;dhis_passwd&#x7d;</httpPassword>
+    <httpPassword>&#x24;&#x7b;dhis_passwd&#x7d;</httpPassword>
     <proxyHost/>
     <proxyPort/>
     <preemptive>N</preemptive>
@@ -434,8 +534,8 @@
       </result>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>699</xloc>
-      <yloc>191</yloc>
+      <xloc>831</xloc>
+      <yloc>19</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -459,12 +559,12 @@
     <methodFieldName/>
     <urlField>URL</urlField>
     <bodyField>outputValue</bodyField>
-    <httpLogin>admin</httpLogin>
-    <httpPassword>district</httpPassword>
-    <httpPassword>Encrypted 2be98afc86aa7f2e4af10bd64cc9bacce</httpPassword>
+    <httpLogin>&#x24;&#x7b;dhis_user&#x7d;</httpLogin>
+    <httpPassword>&#x24;&#x7b;dhis_passwd&#x7d;</httpPassword>
+    <httpPassword>&#x24;&#x7b;dhis_passwd&#x7d;</httpPassword>
     <proxyHost/>
     <proxyPort/>
-    <preemptive>Y</preemptive>
+    <preemptive>N</preemptive>
     <trustStoreFile/>
     <trustStorePassword/>
     <headers>
@@ -478,8 +578,8 @@
       </result>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>120</xloc>
-      <yloc>314</yloc>
+      <xloc>185</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -495,19 +595,19 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <fields>      <field>        <name>Data Element</name>
+    <fields>      <field>        <name>DataElement</name>
         <rename>de</rename>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>Data Element Group</name>
+      </field>      <field>        <name>DE Group</name>
         <rename>de_group</rename>
         <length>-2</length>
         <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>224</xloc>
-      <yloc>91</yloc>
+      <xloc>213</xloc>
+      <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -534,8 +634,36 @@
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>240</xloc>
-      <yloc>317</yloc>
+      <xloc>326</xloc>
+      <yloc>141</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Select values 3</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>de_group</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>de_id</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>550</xloc>
+      <yloc>21</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -568,8 +696,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>325</xloc>
-      <yloc>239</yloc>
+      <xloc>422</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -602,34 +730,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>325</xloc>
-      <yloc>175</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>User Defined Java Expression</name>
-    <type>Janino</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-       <formula><field_name>opt2</field_name>
-<formula_string>&#x22;&#x7b;&#x5c;&#x22;id&#x5c;&#x22;&#x3a;&#x5c;&#x22;&#x22;  &#x2b; de_id&#x2b; &#x22;&#x5c;&#x22;&#x7d;&#x22;</formula_string>
-<value_type>String</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<replace_field/>
-</formula>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>456</xloc>
-      <yloc>282</yloc>
+      <xloc>314</xloc>
+      <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -649,7 +751,7 @@
       <displayHeader>Y</displayHeader>
       <limitRows>N</limitRows>
       <limitRowsNumber>0</limitRowsNumber>
-      <logmessage/>
+      <logmessage>Create DE Groups log</logmessage>
     <fields>
       <field>
         <name>result</name>
@@ -660,8 +762,42 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>802</xloc>
-      <yloc>291</yloc>
+      <xloc>911</xloc>
+      <yloc>20</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>String operations</name>
+    <type>StringOperations</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>deids_concat</in_stream_name>
+        <out_stream_name/>
+        <trim_type>none</trim_type>
+        <lower_upper>none</lower_upper>
+        <padding_type>none</padding_type>
+        <pad_char/>
+        <pad_len/>
+        <init_cap>no</init_cap>
+        <mask_xml>none</mask_xml>
+        <digits>none</digits>
+        <remove_special_characters>espace</remove_special_characters>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>695</xloc>
+      <yloc>129</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
