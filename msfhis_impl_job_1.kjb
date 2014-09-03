@@ -119,8 +119,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>950</xloc>
-      <yloc>30</yloc>
+      <xloc>1036</xloc>
+      <yloc>29</yloc>
       </entry>
     <entry>
       <name>Create Org Unit Group Sets</name>
@@ -251,8 +251,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>786</xloc>
-      <yloc>96</yloc>
+      <xloc>872</xloc>
+      <yloc>95</yloc>
       </entry>
     <entry>
       <name>Create DE group sets</name>
@@ -284,8 +284,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>831</xloc>
-      <yloc>31</yloc>
+      <xloc>917</xloc>
+      <yloc>30</yloc>
       </entry>
     <entry>
       <name>Create CAT options</name>
@@ -317,8 +317,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>522</xloc>
-      <yloc>96</yloc>
+      <xloc>521</xloc>
+      <yloc>95</yloc>
       </entry>
     <entry>
       <name>Create CATs</name>
@@ -350,7 +350,7 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>597</xloc>
+      <xloc>595</xloc>
       <yloc>34</yloc>
       </entry>
     <entry>
@@ -416,8 +416,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>711</xloc>
-      <yloc>35</yloc>
+      <xloc>797</xloc>
+      <yloc>34</yloc>
       </entry>
     <entry>
       <name>Create Org Unit Groups sin OUs</name>
@@ -482,8 +482,41 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>918</xloc>
-      <yloc>98</yloc>
+      <xloc>1007</xloc>
+      <yloc>97</yloc>
+      </entry>
+    <entry>
+      <name>Create CAT combos maintenance</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;msfhis_create_CATcombos_maintenance.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>747</xloc>
+      <yloc>157</yloc>
       </entry>
   </entries>
   <hops>
@@ -517,15 +550,6 @@
     <hop>
       <from>Create CATs</from>
       <to>Create CAT combos</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Create CAT combos</from>
-      <to>Create DE&#x27;s </to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -598,6 +622,24 @@
     <hop>
       <from>Create DataSets</from>
       <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Create CAT combos</from>
+      <to>Create CAT combos maintenance</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Create CAT combos maintenance</from>
+      <to>Create DE&#x27;s </to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

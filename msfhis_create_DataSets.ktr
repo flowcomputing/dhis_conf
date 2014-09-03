@@ -106,7 +106,6 @@
   <hop> <from>Select values 2 2</from><to>Sort rows</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows</from><to>Merge Join</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 2</from><to>Merge Join</to><enabled>Y</enabled> </hop>
-  <hop> <from>Select values</from><to>Sort rows 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Variables</from><to>Modified Java Script Value</to><enabled>Y</enabled> </hop>
   <hop> <from>Modified Java Script Value</from><to>REST Client 2 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values 3</from><to>Memory Group by 2</to><enabled>Y</enabled> </hop>
@@ -114,7 +113,17 @@
   <hop> <from>Build JSON string 2</from><to>REST Client 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Memory Group by 2</from><to>String operations</to><enabled>Y</enabled> </hop>
   <hop> <from>String operations</from><to>Value Mapper</to><enabled>Y</enabled> </hop>
-  <hop> <from>Value Mapper</from><to>Build JSON string 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Json Input 2</from><to>Select values 3 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>REST Client 2 2 2</from><to>Json Input 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Value Mapper</from><to>Sort rows 2 2 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort rows 2 2 2</from><to>Merge Join 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values 3 2</from><to>Sort rows 2 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort rows 2 2</from><to>Merge Join 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Merge Join 2</from><to>Build JSON string 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Variables 2</from><to>Modified Java Script Value 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Modified Java Script Value 2</from><to>REST Client 2 2 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values</from><to>Limit to 50 character</to><enabled>Y</enabled> </hop>
+  <hop> <from>Limit to 50 character</from><to>Sort rows 2</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Build JSON string 2</name>
@@ -131,7 +140,7 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var _ds &#x3d; &#x7b;&#x7d;&#x3b;&#xa;_ds.name &#x3d; ds &#x3b;&#xa;_ds.shortName &#x3d;  ds &#x3b;&#xa;_ds.code &#x3d;  ds &#x3b;&#xa;_ds.description &#x3d;  ds&#x3b;&#xa;_ds.periodType &#x3d;  period&#x3b;&#xa;_ds.dataElements &#x3d; &#x5b;&#x5d;&#x3b;&#xa;&#xa;var deids &#x3d; deids_concat.split&#x28;&#x27;,&#x27;&#x29;&#x3b;&#xa;for&#x28;i&#x3d;0&#x3b; i&#x3c;deids.length&#x3b; i&#x2b;&#x2b;&#x29;&#x7b;&#xa;	var de &#x3d; &#x7b;&#x7d;&#x3b;&#xa;	de.id &#x3d; deids&#x5b;i&#x5d;&#x3b;&#xa;	_ds.dataElements.push&#x28;de&#x29;&#x3b;&#xa;&#x7d;&#xa;&#xa;var jsonString &#x3d; JSON.stringify&#x28;&#x7b;&#x27;dataSets&#x27;&#x3a; &#x5b;_ds&#x5d;&#x7d;&#x29;&#xa;&#x2f;&#x2f;var URL &#x3d; getVariable&#x28;&#x22;dhis_api_meta_url&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xa;&#x2f;&#x2f;&#x7b;&#x22;dataSets&#x22;&#x3a;&#x5b;&#x7b;&#x22;code&#x22;&#x3a;&#x22;ds_test_5&#x22;,&#x22;name&#x22;&#x3a;&#x22;ds_test_5&#x22;,&#x22;shortName&#x22;&#x3a;&#x22;ds_test_5&#x22;,&#x22;description&#x22;&#x3a;&#x22;ds_test_5&#x22;,&#x22;periodType&#x22;&#x3a;&#x22;Monthly&#x22;,&#x22;dataElements&#x22;&#x3a;&#x5b;&#x7b;&#x22;code&#x22;&#x3a;&#x22;HIV28&#x22;,&#x22;name&#x22;&#x3a;&#x22;ART patients enrolled previous year &#x28;ART&#x29;&#x22;,&#x22;id&#x22;&#x3a;&#x22;n7IxQ4S8T3s&#x22;&#x7d;,&#x7b;&#x22;code&#x22;&#x3a;&#x22;HIV26&#x22;,&#x22;name&#x22;&#x3a;&#x22;ART patients enrolled previous year&#x22;,&#x22;id&#x22;&#x3a;&#x22;HcQfC9q3yom&#x22;&#x7d;&#x5d;&#x7d;&#x5d;&#x7d;</jsScript_script>
+        <jsScript_script>var combo &#x3d; &#x7b;&#x7d;&#x3b;&#xa;combo.id &#x3d; id&#x3b;&#xa;&#xa;var _ds &#x3d; &#x7b;&#x7d;&#x3b;&#xa;_ds.name &#x3d; ds &#x3b;&#xa;_ds.shortName &#x3d;  ds &#x3b;&#xa;_ds.code &#x3d;  ds &#x3b;&#xa;_ds.description &#x3d;  ds&#x3b;&#xa;_ds.periodType &#x3d;  period&#x3b;&#xa;_ds.dataElements &#x3d; &#x5b;&#x5d;&#x3b;&#xa;_ds.categoryCombo &#x3d; combo &#x3b;&#xa;&#xa;var deids &#x3d; deids_concat.split&#x28;&#x27;,&#x27;&#x29;&#x3b;&#xa;for&#x28;i&#x3d;0&#x3b; i&#x3c;deids.length&#x3b; i&#x2b;&#x2b;&#x29;&#x7b;&#xa;	var de &#x3d; &#x7b;&#x7d;&#x3b;&#xa;	de.id &#x3d; deids&#x5b;i&#x5d;&#x3b;&#xa;	_ds.dataElements.push&#x28;de&#x29;&#x3b;&#xa;&#x7d;&#xa;&#xa;var jsonString &#x3d; JSON.stringify&#x28;&#x7b;&#x27;dataSets&#x27;&#x3a; &#x5b;_ds&#x5d;&#x7d;&#x29;&#xa;&#x2f;&#x2f;var URL &#x3d; getVariable&#x28;&#x22;dhis_api_meta_url&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xa;&#x2f;&#x2f;&#x7b;&#x22;dataSets&#x22;&#x3a;&#x5b;&#x7b;&#x22;code&#x22;&#x3a;&#x22;ds_test_5&#x22;,&#x22;name&#x22;&#x3a;&#x22;ds_test_5&#x22;,&#x22;shortName&#x22;&#x3a;&#x22;ds_test_5&#x22;,&#x22;description&#x22;&#x3a;&#x22;ds_test_5&#x22;,&#x22;periodType&#x22;&#x3a;&#x22;Monthly&#x22;,&#x22;dataElements&#x22;&#x3a;&#x5b;&#x7b;&#x22;code&#x22;&#x3a;&#x22;HIV28&#x22;,&#x22;name&#x22;&#x3a;&#x22;ART patients enrolled previous year &#x28;ART&#x29;&#x22;,&#x22;id&#x22;&#x3a;&#x22;n7IxQ4S8T3s&#x22;&#x7d;,&#x7b;&#x22;code&#x22;&#x3a;&#x22;HIV26&#x22;,&#x22;name&#x22;&#x3a;&#x22;ART patients enrolled previous year&#x22;,&#x22;id&#x22;&#x3a;&#x22;HcQfC9q3yom&#x22;&#x7d;&#x5d;&#x7d;&#x5d;&#x7d;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>jsonString</name>
         <rename>jsonString</rename>
         <type>String</type>
@@ -140,8 +149,8 @@
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>758</xloc>
-      <yloc>32</yloc>
+      <xloc>1037</xloc>
+      <yloc>111</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -173,8 +182,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>49</xloc>
-      <yloc>143</yloc>
+      <xloc>56</xloc>
+      <yloc>140</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -272,6 +281,9 @@
         </field>
         <field>
           <name>period</name>
+        </field>
+        <field>
+          <name>combo</name>
         </field>
       </group>
       <fields>
@@ -412,6 +424,18 @@
         <decimal/>
         <group/>
       </field>
+      <field>
+        <name>combo</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
     </fields>
     <sheets>
       <sheet>
@@ -470,7 +494,7 @@
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>125</xloc>
+      <xloc>122</xloc>
       <yloc>130</yloc>
       <draw>Y</draw>
       </GUI>
@@ -587,10 +611,14 @@
         <rename>de</rename>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>combo</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>213</xloc>
+      <xloc>176</xloc>
       <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
@@ -644,6 +672,10 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>de_id</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>combo</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -718,7 +750,7 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>314</xloc>
+      <xloc>316</xloc>
       <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
@@ -759,38 +791,6 @@
     </step>
 
   <step>
-    <name>Write to log 2</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>Y</displayHeader>
-      <limitRows>N</limitRows>
-      <limitRowsNumber>0</limitRowsNumber>
-      <logmessage>Create DataSets log</logmessage>
-    <fields>
-      <field>
-        <name>result</name>
-        </field>
-      <field>
-        <name>http_result</name>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>911</xloc>
-      <yloc>20</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>Value Mapper</name>
     <type>ValueMapper</type>
     <description/>
@@ -824,8 +824,373 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>828</xloc>
+      <xloc>784</xloc>
       <yloc>141</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Write to log 2</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+      <limitRows>N</limitRows>
+      <limitRowsNumber>0</limitRowsNumber>
+      <logmessage>Create DataSets log</logmessage>
+    <fields>
+      <field>
+        <name>result</name>
+        </field>
+      <field>
+        <name>http_result</name>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>911</xloc>
+      <yloc>20</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Json Input 2</name>
+    <type>JsonInput</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <include>N</include>
+    <include_field/>
+    <rownum>N</rownum>
+    <addresultfile>N</addresultfile>
+    <readurl>N</readurl>
+    <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <ignoreMissingPath>Y</ignoreMissingPath>
+    <rownum_field/>
+    <file>
+      <name/>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <fields>
+      <field>
+        <name>name</name>
+        <path>&#x24;.categoryCombos&#x5b;&#x2a;&#x5d;.name</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>id</name>
+        <path>&#x24;.categoryCombos&#x5b;&#x2a;&#x5d;.id</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+    </fields>
+    <limit>0</limit>
+    <IsInFields>Y</IsInFields>
+    <IsAFile>N</IsAFile>
+    <valueField>result</valueField>
+    <shortFileFieldName/>
+    <pathFieldName/>
+    <hiddenFieldName/>
+    <lastModificationTimeFieldName/>
+    <uriNameFieldName/>
+    <rootUriNameFieldName/>
+    <extensionFieldName/>
+    <sizeFieldName/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>665</xloc>
+      <yloc>302</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>REST Client 2 2 2</name>
+    <type>Rest</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <applicationType>JSON</applicationType>
+    <method>GET</method>
+    <url/>
+    <urlInField>Y</urlInField>
+    <dynamicMethod>N</dynamicMethod>
+    <methodFieldName/>
+    <urlField>URL</urlField>
+    <bodyField>outputValue</bodyField>
+    <httpLogin>&#x24;&#x7b;dhis_user&#x7d;</httpLogin>
+    <httpPassword>&#x24;&#x7b;dhis_passwd&#x7d;</httpPassword>
+    <httpPassword>&#x24;&#x7b;dhis_passwd&#x7d;</httpPassword>
+    <proxyHost/>
+    <proxyPort/>
+    <preemptive>N</preemptive>
+    <trustStoreFile/>
+    <trustStorePassword/>
+    <headers>
+      </headers>
+    <parameters>
+      </parameters>
+    <result>
+      <name>result</name>
+      <code>http_result</code>
+      <response_time/>
+      </result>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>540</xloc>
+      <yloc>322</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Select values 3 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>name</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>id</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>789</xloc>
+      <yloc>282</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Merge Join 2</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<join_type>LEFT OUTER</join_type>
+<step1>Sort rows 2 2 2</step1>
+<step2>Sort rows 2 2</step2>
+    <keys_1>
+      <key>combo</key>
+    </keys_1>
+    <keys_2>
+      <key>name</key>
+    </keys_2>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>964</xloc>
+      <yloc>202</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sort rows 2 2</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>name</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>906</xloc>
+      <yloc>277</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sort rows 2 2 2</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>combo</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>882</xloc>
+      <yloc>169</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Variables 2</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>dhis_api_url</name>
+        <variable>&#x24;&#x7b;dhis_api_url&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>310</xloc>
+      <yloc>295</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Modified Java Script Value 2</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var URL &#x3d; dhis_api_url &#x2b; &#x22;categoryCombos.json&#x3f;paging&#x3d;false&#x22;&#x3b;&#xa;&#x2f;&#x2f;getVariable&#x28;&#x22;dhis_api_url&#x22;,&#x22;&#x22;&#x29; &#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>URL</name>
+        <rename>URL</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>425</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Limit to 50 character</name>
+    <type>StringCut</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>ds</in_stream_name>
+        <out_stream_name/>
+        <cut_from>0</cut_from>
+        <cut_to>50</cut_to>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>256</xloc>
+      <yloc>21</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
