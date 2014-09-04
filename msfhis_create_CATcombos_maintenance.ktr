@@ -137,8 +137,8 @@
     </step>
 
   <step>
-    <name>Write to log 2</name>
-    <type>WriteToLog</type>
+    <name>Modified Java Script Value 2</name>
+    <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -147,23 +147,21 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>Y</displayHeader>
-      <limitRows>N</limitRows>
-      <limitRowsNumber>0</limitRowsNumber>
-      <logmessage>Create Category Combos Maintenance log</logmessage>
-    <fields>
-      <field>
-        <name>result</name>
-        </field>
-      <field>
-        <name>http_resilt</name>
-        </field>
-      </fields>
-     <cluster_schema/>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var URL &#x3d; dhis_api_url &#x2b; &#x22;maintenance&#x2f;categoryOptionComboUpdate&#x22;&#x3b;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>URL</name>
+        <rename>URL</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>610</xloc>
-      <yloc>66</yloc>
+      <xloc>300</xloc>
+      <yloc>68</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -201,7 +199,7 @@
       </parameters>
     <result>
       <name>result</name>
-      <code>http_resilt</code>
+      <code>http_result</code>
       <response_time/>
       </result>
      <cluster_schema/>
@@ -213,8 +211,8 @@
     </step>
 
   <step>
-    <name>Modified Java Script Value 2</name>
-    <type>ScriptValueMod</type>
+    <name>Write to log 2</name>
+    <type>WriteToLog</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -223,21 +221,23 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var URL &#x3d; dhis_api_url &#x2b; &#x22;maintenance&#x2f;categoryOptionComboUpdate&#x22;&#x3b;&#xa;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>URL</name>
-        <rename>URL</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+      <limitRows>N</limitRows>
+      <limitRowsNumber>0</limitRowsNumber>
+      <logmessage>Create Category Combos Maintenance log</logmessage>
+    <fields>
+      <field>
+        <name>result</name>
+        </field>
+      <field>
+        <name>http_result</name>
+        </field>
+      </fields>
+     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>300</xloc>
-      <yloc>68</yloc>
+      <xloc>606</xloc>
+      <yloc>67</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

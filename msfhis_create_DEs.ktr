@@ -260,7 +260,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<join_type>INNER</join_type>
+<join_type>LEFT OUTER</join_type>
 <step1>Sort rows 2 2</step1>
 <step2>Sort rows 3</step2>
     <keys_1>
@@ -474,7 +474,7 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#x2f;&#x2f;var jsonString &#x3d; &#x27;&#x7b;&#x22;dataElements&#x22;&#x3a;&#x5b;&#x7b;&#x22;name&#x22;&#x3a;&#x22;&#x27;&#x2b; de &#x2b; &#x27;&#x22;,&#x22;shortName&#x22;&#x3a;&#x22;&#x27;&#x2b; de &#x2b; &#x27;&#x22;, &#x22;type&#x22;&#x3a;&#x22;&#x27; &#x2b; type &#x2b; &#x27;&#x22;,&#x22;domainType&#x22;&#x3a;&#x22;aggregate&#x22;,&#x22;aggregationOperator&#x22;&#x3a;&#x22;&#x27; &#x2b; operator &#x2b; &#x27;&#x22;,&#x22;categoryCombo&#x22;&#x3a;&#x7b;&#x22;id&#x22;&#x3a;&#x22;&#x27; &#x2b; cat_combo_id &#x2b; &#x27;&#x22;&#x7d;&#x7d;&#x5d;&#x7d;&#x27;&#x3b;&#xa;&#xa;var catcmb &#x3d; &#x7b;&#x7d;&#x3b;&#xa;	catcmb.id &#x3d; cat_combo_id &#x3b;&#xa;&#xa;var _de &#x3d; &#x7b;&#x7d;&#x3b;&#xa;_de.code&#x3d; de_code&#x3b; &#xa;_de.name &#x3d; de &#x3b;&#xa;_de.shortName &#x3d; de &#x3b;&#xa;_de.type &#x3d; type &#x3b;&#xa;_de.domainType &#x3d; &#x22;aggregate&#x22; &#x3b;&#xa;_de.aggregationOperator &#x3d; operator&#x3b;&#xa;_de.categoryCombo &#x3d; catcmb &#x3b; &#xa;_de.formName &#x3d; formName &#x3b; &#xa;var jsonString &#x3d; JSON.stringify&#x28;&#x7b;&#x27;dataElements&#x27;&#x3a; &#x5b;_de&#x5d;&#x7d;&#x29;&#xa;&#x2f;&#x2f;var URL &#x3d; getVariable&#x28;&#x22;dhis_api_meta_url&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xa;</jsScript_script>
+        <jsScript_script>&#x2f;&#x2f;var jsonString &#x3d; &#x27;&#x7b;&#x22;dataElements&#x22;&#x3a;&#x5b;&#x7b;&#x22;name&#x22;&#x3a;&#x22;&#x27;&#x2b; de &#x2b; &#x27;&#x22;,&#x22;shortName&#x22;&#x3a;&#x22;&#x27;&#x2b; de &#x2b; &#x27;&#x22;, &#x22;type&#x22;&#x3a;&#x22;&#x27; &#x2b; type &#x2b; &#x27;&#x22;,&#x22;domainType&#x22;&#x3a;&#x22;aggregate&#x22;,&#x22;aggregationOperator&#x22;&#x3a;&#x22;&#x27; &#x2b; operator &#x2b; &#x27;&#x22;,&#x22;categoryCombo&#x22;&#x3a;&#x7b;&#x22;id&#x22;&#x3a;&#x22;&#x27; &#x2b; cat_combo_id &#x2b; &#x27;&#x22;&#x7d;&#x7d;&#x5d;&#x7d;&#x27;&#x3b;&#xa;&#xa;var catcmb &#x3d; &#x7b;&#x7d;&#x3b;&#xa;	catcmb.id &#x3d; cat_combo_id &#x3b;&#xa;&#xa;var _de &#x3d; &#x7b;&#x7d;&#x3b;&#xa;_de.code&#x3d; de_code&#x3b; &#xa;_de.name &#x3d; de &#x3b;&#xa;_de.shortName &#x3d; de &#x3b;&#xa;_de.type &#x3d; type &#x3b;&#xa;_de.domainType &#x3d; &#x22;aggregate&#x22; &#x3b;&#xa;_de.aggregationOperator &#x3d; operator&#x3b;&#xa;_de.formName &#x3d; formName &#x3b; &#xa;if &#x28;cat_combo_id &#x21;&#x3d; null&#x29;&#x7b;&#xa;_de.categoryCombo &#x3d; catcmb &#x3b; &#xa;&#x7d;&#xa;&#xa;var jsonString &#x3d; JSON.stringify&#x28;&#x7b;&#x27;dataElements&#x27;&#x3a; &#x5b;_de&#x5d;&#x7d;&#x29;&#xa;&#x2f;&#x2f;var URL &#x3d; getVariable&#x28;&#x22;dhis_api_meta_url&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xa;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>jsonString</name>
         <rename>jsonString</rename>
         <type>String</type>

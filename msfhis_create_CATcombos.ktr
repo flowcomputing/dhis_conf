@@ -130,7 +130,7 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var _catcmb &#x3d; &#x7b;&#x7d;&#x3b;&#xa;_catcmb.name &#x3d; cat_combo &#x3b;&#xa;_catcmb.categories &#x3d; &#x5b;&#x5d;&#x3b;&#xa;&#xa;var catids &#x3d; catids_concat.split&#x28;&#x27;,&#x27;&#x29;&#x3b;&#xa;for&#x28;i&#x3d;0&#x3b; i&#x3c;catids.length&#x3b; i&#x2b;&#x2b;&#x29;&#x7b;&#xa;	var cat &#x3d; &#x7b;&#x7d;&#x3b;&#xa;	cat.id &#x3d; catids&#x5b;i&#x5d;&#x3b;&#xa;	_catcmb.categories.push&#x28;cat&#x29;&#x3b;&#xa;&#x7d;&#xa;&#xa;var jsonString &#x3d; JSON.stringify&#x28;&#x7b;&#x27;categoryCombos&#x27;&#x3a; &#x5b;_catcmb&#x5d;&#x7d;&#x29;&#xa;&#x2f;&#x2f;var URL &#x3d; getVariable&#x28;&#x22;dhis_api_meta_url&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xa;&#xa;</jsScript_script>
+        <jsScript_script>var _catcmb &#x3d; &#x7b;&#x7d;&#x3b;&#xa;_catcmb.name &#x3d; cat_combo &#x3b;&#xa;_catcmb.categories &#x3d; &#x5b;&#x5d;&#x3b;&#xa;_catcmb.dataDimensionType &#x3d; combo_type&#x3b; &#xa;&#xa;var catids &#x3d; catids_concat.split&#x28;&#x27;,&#x27;&#x29;&#x3b;&#xa;for&#x28;i&#x3d;0&#x3b; i&#x3c;catids.length&#x3b; i&#x2b;&#x2b;&#x29;&#x7b;&#xa;	var cat &#x3d; &#x7b;&#x7d;&#x3b;&#xa;	cat.id &#x3d; catids&#x5b;i&#x5d;&#x3b;&#xa;	_catcmb.categories.push&#x28;cat&#x29;&#x3b;&#xa;&#x7d;&#xa;&#xa;var jsonString &#x3d; JSON.stringify&#x28;&#x7b;&#x27;categoryCombos&#x27;&#x3a; &#x5b;_catcmb&#x5d;&#x7d;&#x29;&#xa;&#x2f;&#x2f;var URL &#x3d; getVariable&#x28;&#x22;dhis_api_meta_url&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xa;&#xa;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>jsonString</name>
         <rename>jsonString</rename>
         <type>String</type>
@@ -269,6 +269,9 @@
         <field>
           <name>cat_combo</name>
         </field>
+        <field>
+          <name>combo_type</name>
+        </field>
       </group>
       <fields>
         <field>
@@ -280,7 +283,7 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>642</xloc>
+      <xloc>638</xloc>
       <yloc>27</yloc>
       <draw>Y</draw>
       </GUI>
@@ -362,6 +365,18 @@
       </field>
       <field>
         <name>Category</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Type</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -543,6 +558,10 @@
         <rename>cat</rename>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>Type</name>
+        <rename>combo_type</rename>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -596,6 +615,10 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>cat_id</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>combo_type</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>

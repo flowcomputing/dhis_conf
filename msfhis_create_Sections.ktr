@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>msfhis_create_DataSets</name>
+    <name>msfhis_create_Sections</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -110,12 +110,10 @@
   <hop> <from>Modified Java Script Value</from><to>REST Client 2 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values 3</from><to>Memory Group by 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Merge Join</from><to>Select values 3</to><enabled>Y</enabled> </hop>
-  <hop> <from>Build JSON string 2</from><to>REST Client 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Build JSON string 2</from><to>REST Client 2</to><enabled>N</enabled> </hop>
   <hop> <from>Memory Group by 2</from><to>String operations</to><enabled>Y</enabled> </hop>
-  <hop> <from>String operations</from><to>Value Mapper</to><enabled>Y</enabled> </hop>
   <hop> <from>Json Input 2</from><to>Select values 3 2</to><enabled>Y</enabled> </hop>
   <hop> <from>REST Client 2 2 2</from><to>Json Input 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Value Mapper</from><to>Sort rows 2 2 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 2 2 2</from><to>Merge Join 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values 3 2</from><to>Sort rows 2 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 2 2</from><to>Merge Join 2</to><enabled>Y</enabled> </hop>
@@ -124,6 +122,7 @@
   <hop> <from>Modified Java Script Value 2</from><to>REST Client 2 2 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values</from><to>Limit to 50 character</to><enabled>Y</enabled> </hop>
   <hop> <from>Limit to 50 character</from><to>Sort rows 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>String operations</from><to>Sort rows 2 2 2</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Build JSON string 2</name>
@@ -140,7 +139,7 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var combo &#x3d; &#x7b;&#x7d;&#x3b;&#xa;combo.id &#x3d; id&#x3b;&#xa;&#xa;var _ds &#x3d; &#x7b;&#x7d;&#x3b;&#xa;_ds.name &#x3d; ds &#x3b;&#xa;_ds.shortName &#x3d;  ds &#x3b;&#xa;_ds.code &#x3d;  ds &#x3b;&#xa;_ds.description &#x3d;  ds&#x3b;&#xa;_ds.periodType &#x3d;  period&#x3b;&#xa;_ds.dataElements &#x3d; &#x5b;&#x5d;&#x3b;&#xa;if &#x28;id &#x21;&#x3d; null&#x29;&#x7b;&#xa;_ds.categoryCombo &#x3d; combo &#x3b;&#xa;&#x7d;&#xa;&#xa;var deids &#x3d; deids_concat.split&#x28;&#x27;,&#x27;&#x29;&#x3b;&#xa;for&#x28;i&#x3d;0&#x3b; i&#x3c;deids.length&#x3b; i&#x2b;&#x2b;&#x29;&#x7b;&#xa;	var de &#x3d; &#x7b;&#x7d;&#x3b;&#xa;	de.id &#x3d; deids&#x5b;i&#x5d;&#x3b;&#xa;	_ds.dataElements.push&#x28;de&#x29;&#x3b;&#xa;&#x7d;&#xa;&#xa;var jsonString &#x3d; JSON.stringify&#x28;&#x7b;&#x27;dataSets&#x27;&#x3a; &#x5b;_ds&#x5d;&#x7d;&#x29;&#xa;&#x2f;&#x2f;var URL &#x3d; getVariable&#x28;&#x22;dhis_api_meta_url&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xa;&#x2f;&#x2f;&#x7b;&#x22;dataSets&#x22;&#x3a;&#x5b;&#x7b;&#x22;code&#x22;&#x3a;&#x22;ds_test_5&#x22;,&#x22;name&#x22;&#x3a;&#x22;ds_test_5&#x22;,&#x22;shortName&#x22;&#x3a;&#x22;ds_test_5&#x22;,&#x22;description&#x22;&#x3a;&#x22;ds_test_5&#x22;,&#x22;periodType&#x22;&#x3a;&#x22;Monthly&#x22;,&#x22;dataElements&#x22;&#x3a;&#x5b;&#x7b;&#x22;code&#x22;&#x3a;&#x22;HIV28&#x22;,&#x22;name&#x22;&#x3a;&#x22;ART patients enrolled previous year &#x28;ART&#x29;&#x22;,&#x22;id&#x22;&#x3a;&#x22;n7IxQ4S8T3s&#x22;&#x7d;,&#x7b;&#x22;code&#x22;&#x3a;&#x22;HIV26&#x22;,&#x22;name&#x22;&#x3a;&#x22;ART patients enrolled previous year&#x22;,&#x22;id&#x22;&#x3a;&#x22;HcQfC9q3yom&#x22;&#x7d;&#x5d;&#x7d;&#x5d;&#x7d;</jsScript_script>
+        <jsScript_script>var ds &#x3d; &#x7b;&#x7d;&#x3b;&#xa;ds.id &#x3d; id&#x3b;&#xa;&#xa;var _sec &#x3d; &#x7b;&#x7d;&#x3b;&#xa;_sec.name &#x3d; section &#x3b;&#xa;_sec.dataElements &#x3d; &#x5b;&#x5d;&#x3b;&#xa;_sec.dataSet &#x3d; ds &#x3b;&#xa;&#xa;&#xa;var deids &#x3d; deids_concat.split&#x28;&#x27;,&#x27;&#x29;&#x3b;&#xa;for&#x28;i&#x3d;0&#x3b; i&#x3c;deids.length&#x3b; i&#x2b;&#x2b;&#x29;&#x7b;&#xa;	var de &#x3d; &#x7b;&#x7d;&#x3b;&#xa;	de.id &#x3d; deids&#x5b;i&#x5d;&#x3b;&#xa;	_sec.dataElements.push&#x28;de&#x29;&#x3b;&#xa;&#x7d;&#xa;&#xa;var jsonString &#x3d; JSON.stringify&#x28;&#x7b;&#x27;Sections&#x27;&#x3a; &#x5b;_sec&#x5d;&#x7d;&#x29;&#xa;&#x2f;&#x2f;var URL &#x3d; getVariable&#x28;&#x22;dhis_api_meta_url&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xa;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>jsonString</name>
         <rename>jsonString</rename>
         <type>String</type>
@@ -149,8 +148,8 @@
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1039</xloc>
-      <yloc>111</yloc>
+      <xloc>1037</xloc>
+      <yloc>113</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -280,10 +279,7 @@
           <name>ds</name>
         </field>
         <field>
-          <name>period</name>
-        </field>
-        <field>
-          <name>combo</name>
+          <name>section</name>
         </field>
       </group>
       <fields>
@@ -538,8 +534,8 @@
       </result>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>831</xloc>
-      <yloc>19</yloc>
+      <xloc>836</xloc>
+      <yloc>16</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -599,11 +595,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <fields>      <field>        <name>Period</name>
-        <rename>period</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>DataSet</name>
+    <fields>      <field>        <name>DataSet</name>
         <rename>ds</rename>
         <length>-2</length>
         <precision>-2</precision>
@@ -611,8 +603,8 @@
         <rename>de</rename>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>combo</name>
-        <rename/>
+      </field>      <field>        <name>Section</name>
+        <rename>section</rename>
         <length>-2</length>
         <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
@@ -663,11 +655,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <fields>      <field>        <name>period</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>ds</name>
+    <fields>      <field>        <name>ds</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -675,7 +663,7 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>combo</name>
+      </field>      <field>        <name>section</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -784,47 +772,7 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>681</xloc>
-      <yloc>141</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Value Mapper</name>
-    <type>ValueMapper</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <field_to_use>period</field_to_use>
-    <target_field/>
-    <non_match_default>Yearly</non_match_default>
-    <fields>
-      <field>
-        <source_value>monthly&#x2f;weekly</source_value>
-        <target_value>Monthly</target_value>
-      </field>
-      <field>
-        <source_value>monthly</source_value>
-        <target_value>Monthly</target_value>
-      </field>
-      <field>
-        <source_value>weekly</source_value>
-        <target_value>Weekly</target_value>
-      </field>
-      <field>
-        <source_value>quarterly</source_value>
-        <target_value>Quarterly</target_value>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>784</xloc>
+      <xloc>680</xloc>
       <yloc>141</yloc>
       <draw>Y</draw>
       </GUI>
@@ -892,7 +840,7 @@
     <fields>
       <field>
         <name>name</name>
-        <path>&#x24;.categoryCombos&#x5b;&#x2a;&#x5d;.name</path>
+        <path>&#x24;.dataSets&#x5b;&#x2a;&#x5d;.name</path>
         <type>String</type>
         <format/>
         <currency/>
@@ -905,7 +853,7 @@
       </field>
       <field>
         <name>id</name>
-        <path>&#x24;.categoryCombos&#x5b;&#x2a;&#x5d;.id</path>
+        <path>&#x24;.dataSets&#x5b;&#x2a;&#x5d;.id</path>
         <type>String</type>
         <format/>
         <currency/>
@@ -1020,11 +968,11 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<join_type>LEFT OUTER</join_type>
+<join_type>INNER</join_type>
 <step1>Sort rows 2 2 2</step1>
 <step2>Sort rows 2 2</step2>
     <keys_1>
-      <key>combo</key>
+      <key>ds</key>
     </keys_1>
     <keys_2>
       <key>name</key>
@@ -1091,7 +1039,7 @@
       <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>combo</name>
+        <name>ds</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <presorted>N</presorted>
@@ -1099,8 +1047,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>882</xloc>
-      <yloc>169</yloc>
+      <xloc>818</xloc>
+      <yloc>166</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1153,7 +1101,7 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var URL &#x3d; dhis_api_url &#x2b; &#x22;categoryCombos.json&#x3f;paging&#x3d;false&#x22;&#x3b;&#xa;&#x2f;&#x2f;getVariable&#x28;&#x22;dhis_api_url&#x22;,&#x22;&#x22;&#x29; &#xa;</jsScript_script>
+        <jsScript_script>var URL &#x3d; dhis_api_url &#x2b; &#x22;dataSets.json&#x3f;paging&#x3d;false&#x22;&#x3b;&#xa;&#x2f;&#x2f;getVariable&#x28;&#x22;dhis_api_url&#x22;,&#x22;&#x22;&#x29; &#xa;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>URL</name>
         <rename>URL</rename>
         <type>String</type>

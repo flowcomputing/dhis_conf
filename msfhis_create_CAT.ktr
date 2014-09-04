@@ -111,7 +111,7 @@
   <hop> <from>Modified Java Script Value</from><to>REST Client 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values 3</from><to>Memory Group by 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Merge Join</from><to>Select values 3</to><enabled>Y</enabled> </hop>
-  <hop> <from>Build JSON string 2</from><to>REST Client</to><enabled>Y</enabled> </hop>
+  <hop> <from>Build JSON string 2</from><to>REST Client</to><enabled>N</enabled> </hop>
   <hop> <from>Memory Group by 2</from><to>String operations</to><enabled>Y</enabled> </hop>
   <hop> <from>String operations</from><to>Build JSON string 2</to><enabled>Y</enabled> </hop>
   </order>
@@ -130,7 +130,7 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var _cat &#x3d; &#x7b;&#x7d;&#x3b;&#xa;_cat.name &#x3d; cat &#x3b;&#xa;_cat.categoryOptions &#x3d; &#x5b;&#x5d;&#x3b;&#xa;&#xa;var optids &#x3d; optids_concat.split&#x28;&#x27;,&#x27;&#x29;&#x3b;&#xa;for&#x28;i&#x3d;0&#x3b; i&#x3c;optids.length&#x3b; i&#x2b;&#x2b;&#x29;&#x7b;&#xa;	var opt &#x3d; &#x7b;&#x7d;&#x3b;&#xa;	opt.id &#x3d; optids&#x5b;i&#x5d;&#x3b;&#xa;	_cat.categoryOptions.push&#x28;opt&#x29;&#x3b;&#xa;&#x7d;&#xa;&#xa;var jsonString &#x3d; JSON.stringify&#x28;&#x7b;&#x27;categories&#x27;&#x3a; &#x5b;_cat&#x5d;&#x7d;&#x29;&#xa;&#x2f;&#x2f;var URL &#x3d; getVariable&#x28;&#x22;dhis_api_meta_url&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xa;&#xa;</jsScript_script>
+        <jsScript_script>var _cat &#x3d; &#x7b;&#x7d;&#x3b;&#xa;_cat.name &#x3d; cat &#x3b;&#xa;_cat.categoryOptions &#x3d; &#x5b;&#x5d;&#x3b;&#xa;_cat.dataDimensionType &#x3d; cat_type&#x3b; &#xa;&#xa;var optids &#x3d; optids_concat.split&#x28;&#x27;,&#x27;&#x29;&#x3b;&#xa;for&#x28;i&#x3d;0&#x3b; i&#x3c;optids.length&#x3b; i&#x2b;&#x2b;&#x29;&#x7b;&#xa;	var opt &#x3d; &#x7b;&#x7d;&#x3b;&#xa;	opt.id &#x3d; optids&#x5b;i&#x5d;&#x3b;&#xa;	_cat.categoryOptions.push&#x28;opt&#x29;&#x3b;&#xa;&#x7d;&#xa;&#xa;var jsonString &#x3d; JSON.stringify&#x28;&#x7b;&#x27;categories&#x27;&#x3a; &#x5b;_cat&#x5d;&#x7d;&#x29;&#xa;&#x2f;&#x2f;var URL &#x3d; getVariable&#x28;&#x22;dhis_api_meta_url&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xa;&#xa;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>jsonString</name>
         <rename>jsonString</rename>
         <type>String</type>
@@ -139,8 +139,8 @@
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>796</xloc>
-      <yloc>62</yloc>
+      <xloc>794</xloc>
+      <yloc>61</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -269,6 +269,9 @@
         <field>
           <name>cat</name>
         </field>
+        <field>
+          <name>cat_type</name>
+        </field>
       </group>
       <fields>
         <field>
@@ -362,6 +365,18 @@
       </field>
       <field>
         <name>Category option</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Type</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -543,6 +558,10 @@
         <rename>opt</rename>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>Type</name>
+        <rename>cat_type</rename>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -596,6 +615,10 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>opt_id</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>cat_type</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -677,38 +700,6 @@
     </step>
 
   <step>
-    <name>Write to log</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>Y</displayHeader>
-      <limitRows>N</limitRows>
-      <limitRowsNumber>0</limitRowsNumber>
-      <logmessage>Create Categories log</logmessage>
-    <fields>
-      <field>
-        <name>result</name>
-        </field>
-      <field>
-        <name>http_resilt</name>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>920</xloc>
-      <yloc>16</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>String operations</name>
     <type>StringOperations</type>
     <description/>
@@ -738,6 +729,38 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>734</xloc>
       <yloc>84</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Write to log</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+      <limitRows>N</limitRows>
+      <limitRowsNumber>0</limitRowsNumber>
+      <logmessage>Create Categories log</logmessage>
+    <fields>
+      <field>
+        <name>result</name>
+        </field>
+      <field>
+        <name>http_resilt</name>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>920</xloc>
+      <yloc>16</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

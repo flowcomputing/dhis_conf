@@ -482,8 +482,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1007</xloc>
-      <yloc>97</yloc>
+      <xloc>1004</xloc>
+      <yloc>101</yloc>
       </entry>
     <entry>
       <name>Create CAT combos maintenance</name>
@@ -515,8 +515,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>747</xloc>
-      <yloc>157</yloc>
+      <xloc>764</xloc>
+      <yloc>168</yloc>
       </entry>
   </entries>
   <hops>
