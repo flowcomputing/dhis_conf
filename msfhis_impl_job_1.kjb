@@ -109,8 +109,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>363</xloc>
-      <yloc>108</yloc>
+      <xloc>359</xloc>
+      <yloc>114</yloc>
       </entry>
     <entry>
       <name>Success</name>
@@ -119,8 +119,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1036</xloc>
-      <yloc>29</yloc>
+      <xloc>1192</xloc>
+      <yloc>16</yloc>
       </entry>
     <entry>
       <name>Create Org Unit Group Sets</name>
@@ -518,6 +518,39 @@
       <xloc>764</xloc>
       <yloc>168</yloc>
       </entry>
+    <entry>
+      <name>Create dataset Sections</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;msfhis_create_Sections.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1065</xloc>
+      <yloc>32</yloc>
+      </entry>
   </entries>
   <hops>
     <hop>
@@ -620,15 +653,6 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Create DataSets</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>Create CAT combos</from>
       <to>Create CAT combos maintenance</to>
       <from_nr>0</from_nr>
@@ -640,6 +664,24 @@
     <hop>
       <from>Create CAT combos maintenance</from>
       <to>Create DE&#x27;s </to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Create DataSets</from>
+      <to>Create dataset Sections</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Create dataset Sections</from>
+      <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
